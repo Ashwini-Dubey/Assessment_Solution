@@ -18,9 +18,9 @@ jobs:
       - name: Build & start frontend
         run: |
           cd star-wars
-          npm ci
+          npm install
           npm run build
-          nohup npm start &            # detach in background
+          nohup npm start & 
           cd ..
 
       - uses: actions/setup-python@v5
