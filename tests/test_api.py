@@ -6,7 +6,6 @@ BASE_URL = "https://swapi-node.vercel.app/api"
 Movies_EP = "/films"
 Movies_3_EP  = "/films/3"
 Movies_5_EP  = "/films/5"
-People_EP = "/people"
 
 def send_get_request(base_url:str,endpoint:str):
     url = f"{base_url}{endpoint}"
