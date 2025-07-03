@@ -1,33 +1,36 @@
-name: CI Pipeline for Automated UI & API Tests
+name: CI
 
 on:
   push:
     branches: [test]
   pull_request:
+    branches: [test]
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with: { node-version: 18 }
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 18
 
-      - name: Build & start frontend
-        run: |
-          cd star-wars
-          npm install
-          npm run build
-          nohup npm start & 
-          cd ..
+    - name: Install & build frontend
+      run: |
+        cd star-wars
+        npm ci
+        npm run build
+        nohup npm start &
+        cd ..
 
-      - uses: actions/setup-python@v5
-        with: { python-version: '3.11' }
+    - uses: actions/setup-python@v5
+      with:
+        python-version: 3.11
 
-      - name: Install Python deps
-        run: pip install -r requirements.txt
+    - name: Install Python deps
+      run: pip install -r requirements.txt
 
-      - name: Run tests
-        run: pytest -v
+    - name: Run tests
+      run: pytest tests -v
